@@ -1,6 +1,0 @@
-<% meal_categories = @meal.meal_categories.where(:status => 'active').map(&:category_id) %>
-<% @categories.each do |category| %>
-	<% if (category.menu == @meal.sub_menu.menu) && (category.category_name.casecmp(STANDARD_MEAL_CATEGORY) != 0) %>
-		<li><%= check_box_tag('category', category.id, meal_categories.include?(category.id) ? true : false) %><%= label_tag(category.category_name)%></li>
-	<% end %>
-<% end %>

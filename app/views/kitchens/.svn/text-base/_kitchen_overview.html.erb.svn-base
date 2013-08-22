@@ -1,6 +1,0 @@
-<div class="K_ProfileDescription">
-	<h1 style="margin-left: -6px">Kitchen Profile</h1>
-	<p>
-		<%= kitchen.description.present? ? kitchen.description : "No description available." %>
-	</p>
-</div><!--end K_ProfileDescription-->

@@ -1,8 +1,0 @@
-<% if current_user.present? && current_user.is_kitchen? %>
-<%= render :partial => '/kitchens/kitchen_header', :locals => {:kitchen => current_user.kitchen} %>
-<% end %>
-<div id="MyBasketWraper">
-    <h1 style="color:#990000;">Invoice</h1>
-    <%= render :partial => '/orders/order_details', :locals => {:order => @order} %>
-</div>
-<div class="clear"></div>
