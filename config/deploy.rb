@@ -49,7 +49,7 @@ set :scm_username, "kapil-titanium"
 set :scm_password, 'Kapil@!23'#Capistrano::CLI.password_prompt("Subversion password: ")
 #set :svnserver, "http://svn.rasoiclub.com/svn/"
 #set :server, 'www.rasoiclub.com'
-set :repository,  "https://github.com/kapil-titanium/TestRepo"
+set :repository,  "https://github.com/kapil-titanium/test2"
 set :copy_cache, true
 set :branch, "master"
 #############################################################
