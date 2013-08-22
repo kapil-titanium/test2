@@ -1,0 +1,20 @@
+<script>
+	$(document).ready(function(){
+		$(".meal_detail" ).bind( "click", function() {
+		//$(".meal_detail").click(function(){
+			mealID = $(this).attr('id');
+			if(!jQuery.isEmptyObject(mealID)){					
+				$.ajax({
+					async : true,
+					type : 'GET',
+					url : "/meals/get_meal_detail_info/" + mealID,
+					success : function(data) {
+						$('#meal_details_div').html(data);
+					},
+					error : function(data) {
+					}
+				});
+			}	
+		});
+	});
+</script>

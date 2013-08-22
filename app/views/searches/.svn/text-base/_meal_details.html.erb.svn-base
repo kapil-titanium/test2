@@ -1,0 +1,220 @@
+<script>
+    $('#meal_category').change(function(){
+        $.fn.changeMealDetails(this); //use class='meal_div' as parent div and id='meal_total_price' to change the price dynamically
+    }).change();
+</script>
+<!--Start toPopup -->
+<% if meal.present? %>
+<div id="meal_detail_popup" class="popup_block content meal_div" style="margin-left:-30%;">
+		<!--your content start-->
+	<a class="avgrund-close"></a><!-- <div class="close"></div> -->
+	<div id="popup_content">
+		<!--your content start-->
+
+		<div id="meal_detail_wraper">
+			<div class="row_full">
+
+				<div class="col_1">
+					<h1>Meal Details</h1>
+				</div><!-- end col_1 -->
+				<div class="col_2"></div><!-- end col_2 -->
+
+			</div><!--end row_full 1 -->
+
+			<div class="row_full">
+
+				<div class="col_2" style="height:180px;">
+				    <img src="<%= (meal_picture = meal.picture).present? ? meal_picture.image.mealPicThumb.url : '/assets/Thumbs/thmb_meal1.jpg' %>" width="440" height="180" alt="Meal Detail Thumb" />
+				</div><!-- end col_1 -->
+				<div class="col_1">
+
+					<div class="row_full">
+						<label class="mealhead">Meal Name</label>
+					</div>
+
+					<div class="row_full">
+						<label><%= meal.meal_name.titleize %></label>
+					</div>
+
+					<div class="row_full">
+						<label class="mealhead">Menu</label>
+					</div>
+
+					<div class="row_full">
+						<label><%= meal.sub_menu.menu.menu_name.titleize %></label>
+					</div>
+
+					<div class="row_full">
+						<label class="mealhead">Sub Menu</label>
+					</div>
+
+					<div class="row_full">
+						<label><%= meal.sub_menu.sub_menu_name.titleize %></label>
+					</div>
+
+				</div><!-- end col_1 -->
+
+			</div><!--end row_full 2 -->
+
+			<div class="row_full">
+			    
+			    <%  dishes = meal.dishes
+                    courses = meal.sub_menu.courses
+                    courses.each do |c|
+                    course_dishes = []
+                        dishes.each do |dish|
+                            if dish.course_id == c.id
+                              course_dishes << dish.dish_name
+                            end
+                        end
+                %>
+        				<div class="col_1">
+        					<div class="row_full">
+        						<label class="mealhead"><%= c.course_name.titleize %></label>
+        					</div>
+        
+        					<div class="row_full">
+        						<label>
+        						    <ol>
+                                        <% course_dishes.each do |d| %>
+                                        <li><%= d.titleize %></li>
+                                        <% end %>
+                                    </ol>
+        						</label>
+        					</div>
+        
+        				</div><!-- end col_1 -->
+				    <% end %>
+			</div><!--end row_full 3 -->
+
+			<div class="row_full">
+
+				<div class="col_1">
+					<div class="row_full">
+						<label class="mealhead">Meal Avilable Categories</label>
+					</div>
+					<div class="row_full">
+						<%= select_tag :category_id, options_for_select(meal.meal_categories.all_active.collect {|mc| [mc.category.category_name.titleize, mc.id, {'price' => number_with_two_precision(mc.rc_total_price)}] }), :id => 'meal_category', :class => "srch_drpdn", :style => "width:250px"  %>
+					</div>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+					<div class="row_full">
+						<label class="mealhead">Price</label>
+					</div>
+					<div class="row_full">
+						<label>Rs. <div style="display: inline" id="meal_total_price"></div></label>
+					</div>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+                    <div class="row_full">
+                        <label class="mealhead">Serving Size</label>
+                    </div>
+                    <div class="row_full">
+                        <label><%= meal.serving_size %></label>
+                    </div>
+                </div><!-- end col_1 -->
+
+			</div><!--end row_full 4 -->
+
+			<div class="row_full">
+
+				<div class="col_1">
+					<label class="mealhead">Cuisine</label>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+                    <label class="mealhead">Type</label>
+                </div><!-- end col_1 -->
+                <% if can? :edit, meal.kitchen %>
+                <div class="col_1">
+                    <label class="mealhead">Status</label>
+                </div><!-- end col_1 -->
+                <% end %>
+
+			</div><!--end row_full 5 -->
+
+			<div class="row_full">
+
+				<div class="col_1">
+					<label><%= meal.cuisine.titleize %></label>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+					<label><%= (meal.is_veg) ? "Veg" : "NonVeg" %></label>
+				</div><!-- end col_1 -->
+				<% if can? :edit, meal.kitchen %>
+				<div class="col_1">
+                    <label><%= meal.status.titleize %></label>
+                </div><!-- end col_1 -->
+                <% end %>
+
+			</div><!--end row_full 6 -->
+
+			<div class="row_full">
+
+				<div class="col_1">
+					<label class="mealhead">Minimum Capacity</label>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+					<label class="mealhead">Maximum Capacity</label>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+					<label class="mealhead"></label>
+				</div><!-- end col_1 -->
+
+			</div><!--end row_full 7 -->
+
+			<div class="row_full">
+
+				<div class="col_1">
+					<label><%= meal.min_capacity %></label>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+					<label><%= meal.max_capacity %></label>
+				</div><!-- end col_1 -->
+				<div class="col_1">
+					<label></label>
+				</div><!-- end col_1 -->
+
+			</div><!--end row_full 8 -->
+			<div class="row_full">
+				<div class="col_1">
+					<label class="mealhead">Avilabe Days</label>
+				</div><!-- end col_1 -->
+			</div>
+			<div class="row_full">
+				<div class="col_tiny">
+					<%= check_box_tag :monday, "", (meal.week.monday ? true : false), :disabled => true  %>
+					Monday
+				</div>
+				<div class="col_tiny">
+					<%= check_box_tag :tuesday, "", (meal.week.tuesday ? true : false),  :disabled => true %>
+					Tuesday
+				</div>
+				<div class="col_tiny">
+					<%= check_box_tag :wednesday, "", (meal.week.wednesday ? true : false),  :disabled => true %>
+					Wednesday
+				</div>
+				<div class="col_tiny">
+					<%= check_box_tag :thursday, "", (meal.week.thursday ? true : false),  :disabled => true %>
+					Thursday
+				</div>
+				<div class="col_tiny">
+					<%= check_box_tag :friday, "", (meal.week.friday ? true : false),  :disabled => true %>
+					Friday
+				</div>
+				<div class="col_tiny">
+					<%= check_box_tag :saturday, "", (meal.week.saturday ? true : false),  :disabled => true %>
+					Saturday
+				</div>
+				<div class="col_tiny">
+					<%= check_box_tag :sunday, "", (meal.week.sunday ? true : false),  :disabled => true %>
+					Sunday
+				</div>
+
+			</div><!--end row_full 9 -->
+			<div class="clearfix"></div>
+		</div><!--end meal_detail_wraper-->
+	</div>
+	<!--your content end-->
+</div>
+<% end %>
+<!--toPopup end-->

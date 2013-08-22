@@ -1,0 +1,240 @@
+<!-- <div class="left"> -->
+	<div id="RC_Reg_Wraper">
+		<div id="RC_Reg_Box">
+		    <div align="right">
+			     <font style="color: red;">*</font><font> Mark indicate fields are mandatory</font>
+			</div>
+			<hr />
+			<h3>Profile</h3>
+			<hr />
+			<% if @user.errors.any? %>
+            <% @user.errors.full_messages.each do |msg| %>
+            <p style="font-size: 8px ">
+                <b><%= msg %></b>
+            </p>
+            <% end %>
+            <% end %>
+			<%= form_for(@user, :validate => true , :url => {:action =>'update'} ) do |f| %>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			    <td colspan="2">
+			        <h4>Personal Details</h4>
+			    </td>
+			</tr>
+			<tr>
+                <td>
+                    <label class="subhead">First Name<span style="color: red; font-size: 15px"> *</span>
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :first_name , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Middle Name
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :middle_name , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Last Name<span style="color: red; font-size: 15px"> *</span>
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :last_name , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Gender
+            </label>
+                </td>
+                <td>
+                    <%= f.select :gender, GENDER, :class => "", :prompt =>'Select' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">DOB
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :dob, :class => 'datepick', :style => 'margin-right: 5px;' if !@user.dob.present? %>
+                    <%= f.text_field :dob, :value => @user.dob.strftime('%d %B %Y'), :class => 'datepick' if @user.dob.present? %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Marital Status
+            </label>
+                </td>
+                <td>
+                    <%= f.select :marital_status, MARITAL_STATUS, :class => '', :prompt =>'Select' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Anniversary Date
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :anniversary_date, :class => 'datepick', :style => 'margin-right: 5px;' if !@user.anniversary_date.present? %>
+                    <%= f.text_field :anniversary_date, :value => @user.anniversary_date.strftime('%d %B %Y'), :class => 'datepick' if @user.anniversary_date.present? %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td>
+                    <h4>Contact Details</h4>
+                </td>
+            </tr>
+            <!-- < %= f.fields_for :addresses do |address| % >
+            < %= render "address_fields", :addr => address % >
+            < % end % > -->
+            <tr>
+                <td>
+                    <label class="subhead">Primary Email Id
+            </label>
+                </td>
+                <td>
+                    <%= @user.primary_email_id %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Alternate Email Id
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :alternate_email_id , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Mobile Number<span style="color: red; font-size: 15px"> *</span>
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :primary_mobile_number %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Alternate Mobile Number
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :alternate_contact_number %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Manage Addresses
+            </label>
+                </td>
+                <td>
+                    <%= link_to "Click Here", user_addresses_path(@user.id) %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td>
+                    <h4>Organization Details</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Company Name
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :company_name , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Role/Designation
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :role_designation , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Company Phone Number
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :company_phone_number , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Extension Number
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :company_extension_number , :class => '' %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td>
+                    <h4>Other Details</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Food Type
+            </label>
+                </td>
+                <td>
+                    <%= f.radio_button :is_veg, true %> Vegetarian
+                    <%= f.radio_button :is_veg, false %> Non Vegetarian
+                </td>
+            </tr>
+            <!-- Food Preferences
+            < % = f.text_field :food_preferences , :class => '' % >
+            -->
+            <tr>
+                <td>
+                    <label class="subhead">Alerts
+            </label>
+                </td>
+                <td>
+                    <%= f.check_box :alerts , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">I agree with all the T&amp;C
+            </label>
+                </td>
+                <td>
+                    <%= f.check_box :terms_conditions, :disabled => true, :class => '' %>
+                </td>
+            </tr>
+			<tr>
+			    <td colspan="2">
+			        <%= f.submit('Submit',:class => "Regbtn") %>
+			    </td>
+			</tr>
+			</table>
+			<% end %>
+		</div><!--RC_Login_Box-->
+		<div class="clear"></div>
+	</div>
+	<!--End Registration form-->
+
+	<div class="clear"></div>
+<!-- </div> --><!-- END LEFT COL OF MAIN CONTENT-->
+
+<!-- <div class="right">
+
+</div> --><!-- END RIGHT SIDE BAR COL OF MAIN CONTENT-->
+<div class="clear"></div>

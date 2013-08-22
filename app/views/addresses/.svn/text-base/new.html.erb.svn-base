@@ -1,0 +1,14 @@
+<%= form_for @address, :url => user_addresses_path(@user) do |address| %>
+    <div id="RC_Reg_Wraper">
+        <div id="RC_Reg_Box">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <%= render :partial => 'address_fields', :locals => {:a => address} %>
+            <tr>
+                <td colspan="2">
+                    <%= address.submit('Submit', :class => "Regbtn" ) %>
+                </td>
+            </tr>
+            </table>
+        </div>
+    </div>
+<% end %>

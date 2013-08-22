@@ -1,0 +1,34 @@
+<script>
+	$(document).ready(function() {
+		$("#sub_menu").change(function() {
+			var selectedSubMenu = $(this).val();
+			var kitchenID = $("#kitchenID").val();
+			if (selectedSubMenu == "") {
+				selectedSubMenu = 0;
+			}
+			if (selectedSubMenu == 0) {
+				$('#display_dishes_div').hide('slow');
+			} else {
+				$('#display_dishes_div').show('slow');
+			}
+			$.ajax({
+				async : true,
+				type : 'GET',
+				url : "/meals/get_dishes_for_meal_creation/" + selectedSubMenu + "/" + kitchenID,
+				success : function(data) {
+					$('#display_dishes_div').html(data);
+				},
+				error : function(data) {
+				}
+			});
+
+		});
+	})
+</script>
+
+<% if @sub_menus.present? %>
+<%= select_tag 'sub_menu_id', options_from_collection_for_select(@sub_menus, "id", "sub_menu_name"), :prompt => 'Select Sub Menu', :id => 'sub_menu', :style => "width:250px;" %>
+<% else %>
+<%= select_tag 'sub_menu_id', (@meal.present? && @meal.sub_menu.present?) ? options_from_collection_for_select(@meal.sub_menu.menu.sub_menus, 'id', 'sub_menu_name', @meal.sub_menu.id) : options_for_select([]), :prompt => 'Select Sub Menu', :id => 'sub_menu', :class => 'sub_menu', :style => "width:250px;" %>
+<% end %>
+

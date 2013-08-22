@@ -1,0 +1,245 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev.WildMushroom.com/!svn/ver/3693/branches/dev.innovation.rasoiclub.com/db/migrate
+END
+20130705114728_create_sub_menu_course_criteria.rb
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/dev.WildMushroom.com/!svn/ver/2764/branches/dev.innovation.rasoiclub.com/db/migrate/20130705114728_create_sub_menu_course_criteria.rb
+END
+20130705054951_create_meals.rb
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dev.WildMushroom.com/!svn/ver/3208/branches/dev.innovation.rasoiclub.com/db/migrate/20130705054951_create_meals.rb
+END
+20130705093059_create_menus.rb
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dev.WildMushroom.com/!svn/ver/2803/branches/dev.innovation.rasoiclub.com/db/migrate/20130705093059_create_menus.rb
+END
+20130706122612_create_galleries.rb
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/dev.WildMushroom.com/!svn/ver/2833/branches/dev.innovation.rasoiclub.com/db/migrate/20130706122612_create_galleries.rb
+END
+20130720071623_create_kitchen_orders.rb
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/dev.WildMushroom.com/!svn/ver/3226/branches/dev.innovation.rasoiclub.com/db/migrate/20130720071623_create_kitchen_orders.rb
+END
+20130720074626_create_out_payments.rb
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/dev.WildMushroom.com/!svn/ver/3230/branches/dev.innovation.rasoiclub.com/db/migrate/20130720074626_create_out_payments.rb
+END
+20130727082500_create_canceled_orders.rb
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/dev.WildMushroom.com/!svn/ver/3496/branches/dev.innovation.rasoiclub.com/db/migrate/20130727082500_create_canceled_orders.rb
+END
+20130715124913_create_areas.rb
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dev.WildMushroom.com/!svn/ver/2935/branches/dev.innovation.rasoiclub.com/db/migrate/20130715124913_create_areas.rb
+END
+20130706125359_create_sub_menu_course_infos.rb
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/dev.WildMushroom.com/!svn/ver/2795/branches/dev.innovation.rasoiclub.com/db/migrate/20130706125359_create_sub_menu_course_infos.rb
+END
+20130710110211_create_rc_constants.rb
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/dev.WildMushroom.com/!svn/ver/2898/branches/dev.innovation.rasoiclub.com/db/migrate/20130710110211_create_rc_constants.rb
+END
+20130727082426_create_ledgers.rb
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/dev.WildMushroom.com/!svn/ver/3495/branches/dev.innovation.rasoiclub.com/db/migrate/20130727082426_create_ledgers.rb
+END
+20130706122634_create_pictures.rb
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/dev.WildMushroom.com/!svn/ver/2985/branches/dev.innovation.rasoiclub.com/db/migrate/20130706122634_create_pictures.rb
+END
+20130705055228_create_meal_dishes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/dev.WildMushroom.com/!svn/ver/2815/branches/dev.innovation.rasoiclub.com/db/migrate/20130705055228_create_meal_dishes.rb
+END
+20130717062706_create_baskets.rb
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/dev.WildMushroom.com/!svn/ver/3116/branches/dev.innovation.rasoiclub.com/db/migrate/20130717062706_create_baskets.rb
+END
+20130705054929_create_dishes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dev.WildMushroom.com/!svn/ver/2813/branches/dev.innovation.rasoiclub.com/db/migrate/20130705054929_create_dishes.rb
+END
+20130715062014_create_weeks.rb
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dev.WildMushroom.com/!svn/ver/2927/branches/dev.innovation.rasoiclub.com/db/migrate/20130715062014_create_weeks.rb
+END
+20130710125208_create_searches.rb
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/dev.WildMushroom.com/!svn/ver/2986/branches/dev.innovation.rasoiclub.com/db/migrate/20130710125208_create_searches.rb
+END
+20130705050519_create_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dev.WildMushroom.com/!svn/ver/2731/branches/dev.innovation.rasoiclub.com/db/migrate/20130705050519_create_users.rb
+END
+20130705055333_create_meal_categories.rb
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/dev.WildMushroom.com/!svn/ver/2915/branches/dev.innovation.rasoiclub.com/db/migrate/20130705055333_create_meal_categories.rb
+END
+20130705050822_create_addresses.rb
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/dev.WildMushroom.com/!svn/ver/2731/branches/dev.innovation.rasoiclub.com/db/migrate/20130705050822_create_addresses.rb
+END
+20130705094354_create_courses.rb
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/dev.WildMushroom.com/!svn/ver/2806/branches/dev.innovation.rasoiclub.com/db/migrate/20130705094354_create_courses.rb
+END
+20130720074510_create_payments.rb
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/dev.WildMushroom.com/!svn/ver/3229/branches/dev.innovation.rasoiclub.com/db/migrate/20130720074510_create_payments.rb
+END
+20130720071705_create_kitchen_order_line_items.rb
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/dev.WildMushroom.com/!svn/ver/3227/branches/dev.innovation.rasoiclub.com/db/migrate/20130720071705_create_kitchen_order_line_items.rb
+END
+20130705093900_create_categories.rb
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/dev.WildMushroom.com/!svn/ver/2805/branches/dev.innovation.rasoiclub.com/db/migrate/20130705093900_create_categories.rb
+END
+20130730093829_create_size_limits.rb
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/dev.WildMushroom.com/!svn/ver/3439/branches/dev.innovation.rasoiclub.com/db/migrate/20130730093829_create_size_limits.rb
+END
+20130708071103_create_teams.rb
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dev.WildMushroom.com/!svn/ver/2839/branches/dev.innovation.rasoiclub.com/db/migrate/20130708071103_create_teams.rb
+END
+20130705093656_create_sub_menus.rb
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/dev.WildMushroom.com/!svn/ver/3494/branches/dev.innovation.rasoiclub.com/db/migrate/20130705093656_create_sub_menus.rb
+END
+20130720073940_create_orders.rb
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dev.WildMushroom.com/!svn/ver/3393/branches/dev.innovation.rasoiclub.com/db/migrate/20130720073940_create_orders.rb
+END
+20130717102719_create_line_items.rb
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/dev.WildMushroom.com/!svn/ver/3208/branches/dev.innovation.rasoiclub.com/db/migrate/20130717102719_create_line_items.rb
+END
+20130716054655_create_kitchen_cut_off_hours.rb
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/dev.WildMushroom.com/!svn/ver/2942/branches/dev.innovation.rasoiclub.com/db/migrate/20130716054655_create_kitchen_cut_off_hours.rb
+END
+20130706113250_create_friendly_id_slugs.rb
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/dev.WildMushroom.com/!svn/ver/2791/branches/dev.innovation.rasoiclub.com/db/migrate/20130706113250_create_friendly_id_slugs.rb
+END
+20130715124851_create_delivery_zones.rb
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/dev.WildMushroom.com/!svn/ver/2964/branches/dev.innovation.rasoiclub.com/db/migrate/20130715124851_create_delivery_zones.rb
+END
+20130705050634_create_kitchens.rb
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/dev.WildMushroom.com/!svn/ver/3208/branches/dev.innovation.rasoiclub.com/db/migrate/20130705050634_create_kitchens.rb
+END
+20130708071023_create_employees.rb
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/dev.WildMushroom.com/!svn/ver/2838/branches/dev.innovation.rasoiclub.com/db/migrate/20130708071023_create_employees.rb
+END
+20130716054558_create_cut_off_hours.rb
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/dev.WildMushroom.com/!svn/ver/3693/branches/dev.innovation.rasoiclub.com/db/migrate/20130716054558_create_cut_off_hours.rb
+END
+20130709093118_create_team_employees.rb
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/dev.WildMushroom.com/!svn/ver/2840/branches/dev.innovation.rasoiclub.com/db/migrate/20130709093118_create_team_employees.rb
+END
+20130730093955_create_kitchen_size_limits.rb
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/dev.WildMushroom.com/!svn/ver/3439/branches/dev.innovation.rasoiclub.com/db/migrate/20130730093955_create_kitchen_size_limits.rb
+END
+20130706112608_add_slug_to_kitchens.rb
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/dev.WildMushroom.com/!svn/ver/2791/branches/dev.innovation.rasoiclub.com/db/migrate/20130706112608_add_slug_to_kitchens.rb
+END
+20130717070010_create_cities.rb
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dev.WildMushroom.com/!svn/ver/2965/branches/dev.innovation.rasoiclub.com/db/migrate/20130717070010_create_cities.rb
+END
+20130705050650_create_logins.rb
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dev.WildMushroom.com/!svn/ver/2731/branches/dev.innovation.rasoiclub.com/db/migrate/20130705050650_create_logins.rb
+END

@@ -1,0 +1,165 @@
+<!--[if lte IE 8]>
+
+<style>
+
+/* Hide split menu from IE8 and below */
+
+div.css3splitmenu {
+        margin-right: 5px;
+        }
+
+div.css3splitmenu > a:after {
+        display: none;
+        }
+
+div.css3splitmenu > input {
+        display: none;
+        }
+
+div.css3splitmenu > ul {
+        display: none;
+        }
+
+</style>
+
+<![endif]-->
+<script type="text/javascript">
+	// $(function() {
+	// $(".menu").hover(
+	// function() { $(".sub").slideToggle(400); },
+	// function() { $(".sub").hide(); }
+	// );
+	// });
+
+	$(document).ready(function() {
+		$('.add_meal_to_categories').click(function() {
+			var mealId = $(this).attr('id');
+			var mealCategoriesDiv = $(this).parents("#add_button_div").siblings().attr('id');
+			var arr = [];
+			$(this).parents("#add_button_div").siblings().find("input[type=checkbox]:checked").each(function() {
+				arr.push($(this).val());
+			});
+			$(this).parent().parents("#categories_block_div").find("input[type=checkbox]").click();		//to close meal categories display 
+			if (jQuery.isEmptyObject(arr)) {
+				arr = null;
+			}
+			$.ajax({
+				async : true,
+				type : 'GET',
+				url : "/meals/add_meal_to_categories/" + mealId + "/" + arr,
+				success : function(data) {
+					$('#' + mealCategoriesDiv).html(data);
+					
+				},
+				error : function(data) {
+				}
+			});
+		});
+	}); 
+</script>
+<div id="workspace">
+	<%= render :partial => '/kitchens/kitchen_header', :locals => {:kitchen => @kitchen} %>
+<div class="K_Dish_Display">
+	<div class="K_D_Head">
+		<h1 class="pull-left">Meals</h1>
+		<table class="pull-right" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+
+				<td><!-- <a href="" class="Createmeal_Tips" style="display:block; ">What are catagories?</a><a href="" class="Createmeal_Tips"  style="display:block; ">How to create meal?</a> --></td>
+				<td><%= link_to 'Create meal', new_kitchen_meal_path(@kitchen), :class => "btn-creatmeal",  :style => "margin-right:10px;" %>
+				</td>
+			</tr>
+		</table>
+
+		<div class="clearfix"></div>
+		<div class="K_D_Filter_Row">
+			<!-- <a href="#">All</a><a href="#">Party</a><a href="#">Treat</a><a href="#">Dinner</a><a href="#">Lunch</a><a href="#">Breakfast</a> -->
+
+			<div class="pull-right" style="margin:3px 15px; height:20px;">
+				<!-- <div class="fancy-radio activate" style="display: inline-block; z-index: 1000;">
+					Activate
+				</div>
+				<div class="fancy-radio deactivate" style="display: inline-block; z-index: 1000;">
+					De-Activate
+				</div> -->
+				<!--<input name="" type="radio" value="Activate" class="fancy-radio" checked /> Activate | <input name="" type="radio" value="Deactivate" /> Deactivate-->
+			</div>
+		</div><!--K_D_Filter_Row-->
+	</div><!--end K_D_Head -->
+	<div class="inner">
+	<% if @meals.present? %>
+	<% @meals.each do |meal| %>
+	<% if !(meal.is_deleted) %>
+		<div class=<%= meal.is_meal_active? ? "mealblockA" : "mealblockD"%> >
+			<label><%= meal.meal_name.capitalize %></label>
+			<div class="pull-right" style="margin-right:10px;">
+				<!-- <input name="" type="checkbox" value="" /> -->
+			</div>
+			<div class="css3splitmenu pull-right" id="categories_block_div">
+				<a title="Set Service Offerings"></a>
+				<input type="checkbox" id="meal_categories_checkbox" />
+				<ul id="t">
+				<% if meal.status == MEAL_STATUS_ACTIVE %>	
+				<div id = 'categories_div_<%= meal.id %>' >
+					<% meal_categories = meal.meal_categories.where(:status => 'active').map(&:category_id) %>
+					<% @categories.each do |category| %>
+						<% if (category.menu == meal.sub_menu.menu) && (category.category_name.casecmp(STANDARD_MEAL_CATEGORY) != 0) %>
+							<li><%= check_box_tag('category', category.id, meal_categories.include?(category.id) ? true : false) %><%= label_tag(category.category_name)%></li>
+						<% end %>
+					<% end %>
+				</div>
+				
+				<div id="add_button_div">
+					<%= submit_tag 'Add', :class => 'add_meal_to_categories btn-creatmeal', :id => meal.id %>
+				</div>
+				<% else %>
+					<li>Please activate meal to add in categories</li>
+				<% end %>
+				</ul>
+			</div>
+			<div class="mealthumb">
+			     <% if meal.picture.present? %> 
+			         <img src="<%= meal.picture.image.mealPic.url %>" width="220" height="90" />
+			    <% else %> 
+			         <img src="/assets/Thumbs/thmb_blank_plate.jpg" width="220" height="90" />
+			    <% end %>
+			</div><!--end mealthumb-->
+			<div class="mealinfo">
+				<div class="m-disc">
+					<%= meal.description.present? ? meal.description : "No description available." %>
+				</div><!--end m-disc-->
+				<label style="font-size:18px; color:#333;"><%= meal.cuisine.titleize %></label><label style="float:right; font-size:18px; color:#333;"><%= meal.sub_menu.sub_menu_name.titleize %></label>
+				<div class="clearfix" style="margin:7px 0;"></div>
+				<label style="font-size:18px; color:#333;">Kitchen only @ :</label><label style="font-size:25px; color:#F00;"><%= meal.kitchen_price %>/-</label>
+				<div class=<%= meal.is_veg ? "iconVeg" : "iconNonVeg" %> ></div>
+				<!-- < % if meal.get_meal_categories.present? % >
+				<hr />
+                <label style="font-size:16px; color:#333;">Available in categories :</label>
+                <div class="m-category">
+                    < % = meal.get_meal_categories.join(', ') % >
+                </div>
+                < % end % > -->
+			</div><!--end mealinfo-->
+			<%= link_to 'Edit Meal', edit_kitchen_meal_path(@kitchen, meal),  :class => "btn-creatmeal",  :style => "display:block;" %>
+		</div><!--end mealblockA-->
+	<% end %>
+	<% end %>
+	<% end %>
+		<div class="clearfix"></div>
+	</div>
+</div><!-- end K_Dish_Display -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

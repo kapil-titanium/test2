@@ -1,0 +1,163 @@
+<div id="workspace">
+	<%= render :partial => '/kitchens/kitchen_header', :locals => {:kitchen => @kitchen} %>
+	<div class="">
+		<div id="RC_Reg_Wraper">
+			<div id="RC_Reg_Box">
+				<% if @kitchen.errors.any? %>
+				<% @kitchen.errors.full_messages.each do |msg| %>
+				<p style="font-size: 8px ">
+					<b><%= msg %></b>
+				</p>
+				<% end %>
+				<% end %>
+				<div align="right">
+                     <font style="color: red;">*</font><font> Mark indicate fields are mandatory</font>
+                </div>
+                <hr />
+				<%= form_for(@kitchen, :validate => true , :url => {:action =>'update'}, :id => @kitchen.id ) do |f| %>
+				<table width="100%" border="0" cellspacing="0" cellpadding="2">
+					<tr>
+						<td><label class="subhead">Kitchen's Name
+							<sapn style="color: red;" >
+								*
+							</sapn> </label></td>
+						<td> <%= f.text_field :kitchen_name , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Contact Person's First Name
+							<sapn style="color: red;" >
+								*
+							</sapn> </label></td>
+						<td> <%= f.text_field :primary_contact_name , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Contact Person's Last Name
+							<sapn style="color: red;" >
+								*
+							</sapn> </label></td>
+						<td> <%= f.text_field :last_name , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Contact Number
+							<sapn style="color: red;" >
+								*
+							</sapn> </label></td>
+						<td> <%= f.text_field :primary_contact_number , :class => 'only_numerics', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Alternate Contact Number </label></td>
+						<td> <%= f.text_field :alternative_contact_number , :class => 'only_numerics', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Primary Email Id
+							<sapn style="color: red;" >
+								*
+							</sapn> </label></td>
+						<td> <%= @kitchen.primary_email_id %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Alternative Email ID </label></td>
+						<td> <%= f.text_field :alternative_email_id , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<% if @kitchen.delivery_zone.present? %>
+					<tr>
+						<td><label class="subhead">Delivery Zone</label></td>
+						<td><%= @kitchen.delivery_zone.name.capitalize %></td>
+					</tr>
+					<% end %>
+					<tr>
+						<td><label class="subhead">Kitchen Description </label></td>
+						<td> <%= f.text_area :description, :style => "width:235px; height: 80px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Tag Line </label></td>
+						<td> <%= f.text_field :tag_line , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead"> Cuisine Style </label></td>
+						<td> <%= f.select :cuisine_style, CUISINE, {:include_blank => "Select Style"}, :class => "", :style => "width:248px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Payment Preference </label></td>
+						<td> <%= f.select :payment_preference, PAYMENT_PREFERENCE.invert, {:include_blank => "Select Preference"}, :class => "", :style => "width:248px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Account Name </label></td>
+						<td> <%= f.text_field :account_name , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Account No. </label></td>
+						<td> <%= f.text_field :account_number , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Bank Name </label></td>
+						<td> <%= f.text_field :bank_name , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">Branch </label></td>
+						<td> <%= f.text_field :branch , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<tr>
+						<td><label class="subhead">IFSC Code </label></td>
+						<td> <%= f.text_field :ifsc_code , :class => '', :style => "width:235px;" %> </td>
+					</tr>
+					<%= fields_for @kitchen.user do |u| %>
+					<%= u.fields_for :address, @address, :validate => true  do |a| %>
+					<%= render :partial => 'addresses/address_fields', :locals => {:a => a, :areas => @areas} %>
+					<% end %>
+					<% end %>
+					<tr>
+						<td colspan="2"> <%= f.submit('Update', :class => "Regbtn update_kitchen_profile") %> </td>
+					</tr>
+				</table>
+				<% end %>
+
+			</div><!--RC_Login_Box-->
+			<div class="clear"></div>
+		</div>
+		<!--End Registration form-->
+
+		<div class="clear"></div>
+	</div><!-- END LEFT COL OF MAIN CONTENT-->
+
+	<!-- <div class="right">
+
+	</div> --><!-- END RIGHT SIDE BAR COL OF MAIN CONTENT-->
+	<div class="clear"></div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('.update_kitchen_profile').click(function(){
+			flag = validateAreaPresent();
+			if( flag == false){
+				return flag;
+			}
+			return validateStatePresent();	
+		});
+	});
+	$('#user_address_area').focusout(function(){
+		return validateAreaPresent();
+	});
+	$('#user_address_state').focusout(function(){
+		return validateStatePresent();
+	});
+	
+	function validateAreaPresent(){
+		if (jQuery.isEmptyObject($('#user_address_area').val())){
+			$("#area_error_id").html("please select area");
+			return false;
+		}else{
+			$("#area_error_id").html("");
+			return true;
+		}
+	}
+	function validateStatePresent(){
+		if (jQuery.isEmptyObject($('#user_address_state').val())){
+			$("#state_error_id").html("please select state");
+			return false;
+		}else{
+			$("#state_error_id").html("");
+			return true;
+		}
+	}
+</script>

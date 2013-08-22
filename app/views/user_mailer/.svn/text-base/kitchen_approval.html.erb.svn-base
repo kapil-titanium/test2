@@ -1,0 +1,15 @@
+<p>
+	Dear <%= "#{@kitchen.primary_contact_name.capitalize} #{@kitchen.last_name.capitalize}" %>,
+</p>
+<p>
+	Congratulations!<br /> Your kitchen <b>"<%= @kitchen.kitchen_name %>"</b> has been approved on Rasoi Club.<br />
+	Please log in and start adding dishes and preparing Menu.<br />
+	For any queries, please contact Rasoi Club Marketing Team at 88888-58398.	
+</p>
+<p>
+	<br />
+	Thanks,<br />
+	Rasoi Club Marketing Team<br />
+	www.rasoiclub.com<br /><br />
+	This is a system generated mail. Please do not reply.
+</p>

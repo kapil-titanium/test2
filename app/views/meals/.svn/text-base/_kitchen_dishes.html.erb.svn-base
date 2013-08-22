@@ -1,0 +1,41 @@
+<% if sub_menu.present? %>
+<div id="rc_price_range_min" style="display: none">
+	<%= sub_menu.rc_price_range_min  %>
+</div>
+<div id="rc_price_range_max" style="display: none">
+	<%= sub_menu.rc_price_range_max %>
+</div>
+<% end %>
+<table width="100%" cellpadding="2" cellspacing="2" border="0" align="center" style="background:#ffeac6;">
+<tr style="color:#990000">
+<% @courses.each do |c| %>
+<td>
+	<div class = 'course'>
+		<div class = 'course_id' style="display: none">
+			<%= c.id %>
+		</div>
+		<div class = 'minimum_qty' style="display: none">
+			<%=  @sub_menu_courses_infos.where(:course_id => c.id).pluck(:min_qty)[0] %>
+		</div>
+		<div class = 'maximum_qty' style="display: none">
+			<%= @sub_menu_courses_infos.where(:course_id => c.id).pluck(:max_qty)[0] %>
+		</div>
+		<div class = 'course_name_id'>
+			<%= c.course_name.capitalize %>(select min- <%=  @sub_menu_courses_infos.where(:course_id => c.id).pluck(:min_qty)[0] %> and max- <%= @sub_menu_courses_infos.where(:course_id => c.id).pluck(:max_qty)[0] %>)
+		</div>
+		
+		<% dishes = [] 
+			@dishes.each do |dish|
+				if dish.course_id == c.id
+					dishes << dish
+				end
+		end %>
+		<%  arr_of_id = []
+			@meal.dishes.select{|dish| arr_of_id<<dish.id } if @meal.present?
+		%>
+		<%= select_tag 'dishes', options_from_collection_for_select(dishes, 'id', 'dish_name', (arr_of_id.present? ? arr_of_id : 0) ), :id => 'course_dishes_' + c.id.to_s , :multiple => true, :style => "width:250px" %>
+	</div>
+</td>
+<% end if @courses.present? %>
+</tr>
+</table>

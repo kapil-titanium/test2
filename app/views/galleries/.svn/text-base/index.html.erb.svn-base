@@ -1,0 +1,125 @@
+<script>
+    $('#myTab a').click(function(e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    function deleteGallery(me) {
+        iDiv = me.parentNode.parentNode.parentNode.parentNode;
+        // alert(iDiv.innerHTML);
+
+        $.ajax({
+            url : $(me).attr('href'),
+            type : 'DELETE',
+            success : function(e) {
+                $(iDiv).fadeOut(1000);
+            }
+        });
+        return false;
+    }
+    
+</script>
+<%= render :partial => '/kitchens/kitchen_header', :locals => {:kitchen => @kitchen} %>
+
+<div class="K_Dish_Display">
+    <div class="K_D_Head">
+        <h1 class="pull-left">
+            <a href="<%= kitchen_galleries_path(@kitchen) %>" style="text-decoration: none; color: inherit" path = "/orders/get_all_orders">Album</a>
+        </h1>
+        <table class="pull-right" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td></td>
+                <td>
+                    <% if can? :create, Gallery %>
+                    <a href="#" rel="create_album_popup" id="model_createAlbum" class="btn-creatmeal topopup" style="margin-right:10px;">Create Album</a>
+                    <% end %>
+                </td>
+            </tr>
+        </table>
+
+        <div class="clearfix"></div>
+        <div class="K_D_Filter_Row" style="border-bottom: 1px #DDDDDD solid;">
+            
+        </div>
+    </div><!--end K_D_Head -->
+    <div class="inner">
+        <div  class="orders_data">
+            
+            <ul class="thumbnails files">
+                <% @kitchen.galleries.order("id asc").each do |gallery| %>
+                <li class="span3" id="gallery_<%= gallery.id %>">
+                    <div class="thumbnail">
+                        <% if gallery.cover.blank? or !Picture.find_by_id(gallery.cover) %>
+                        <a href="<%= kitchen_gallery_path(@kitchen, gallery) %>"> <img src="/assets/NoImageAvailable.jpg" alt=""> </a>
+                        <% else %>
+                        <a href="<%= kitchen_gallery_path(@kitchen, gallery) %>"> <img src="<%= Picture.find_by_id(gallery.cover).image.thumb.url %>" alt=""> </a>
+                        <% end %>
+                        
+                        <% if can? :edit, gallery %>
+                        <div>     
+                            <div id='album_id' style="display: none"><%= gallery.id %></div>          
+                            <p style="text-align: center;">
+                                <a href="<%= edit_kitchen_gallery_path(@kitchen, gallery) %>" class="btn btn-mini"> <i class="icon-edit "></i> Edit </a>
+                                <% if gallery.gallery_name != DEFAULT_GALLERY_NAME %>
+                                    <a class="btn btn-mini btn-delete" href="<%= kitchen_gallery_path(@kitchen, :id => gallery.id) %>" onclick = 'deleteGallery(this); return false;'> <i class="icon-trash"></i> Delete </a>
+                                <% end %>
+                            </p>
+                        </div>
+                        <% end %>
+                    </div>
+                    <% if gallery.gallery_name != DEFAULT_GALLERY_NAME %>
+                        <h5 align="center"><%= gallery.gallery_name %></h5>
+                    <% else %>
+                        <h5 align="center">...</h5>
+                    <% end %>
+                        <!-- 
+                            HTML ending tags for 'caption' class of this div is uneven as the tags depends on the if else condition
+                         -->
+                </li>
+                <% end %>
+                <div class="clear"></div>
+            </ul>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div><!-- end K_Dish_Display -->
+<!--End Profile Info-->
+
+
+<!-- START Pop-up to CREATE Album -->
+    <!-- Please toPopup_model_---- class always apply as first class  -->
+<div id="create_album_popup" class="popup_block custom content" style="width: 350px;margin-left: -200px;margin-top: 50px">
+    <%- model_class = @gallery.class -%>
+    <%= form_for [@kitchen], :validate => true, :url => kitchen_galleries_path, :method => 'post', :html => { :class => 'form-horizontal' } do |f| %>
+        <%= f.fields_for @gallery, :validate => true do |g| %>
+            <a href="#" class="avgrund-close"></a>
+            <h3><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                             :default => "Create Album") %></h3><!--  #{model_class.model_name.human} -->
+            <table>
+                <tr>
+                    <td valign="center">Album Name</td>
+                    <td>:</td>
+                    <td>
+                         <%= g.text_field :gallery_name, :class => '', :style => "" %>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="center">Description</td>
+                    <td>:</td>
+                    <td>
+                        <%= g.text_field :description, :class => '', :style => "" %>
+                    </td>
+                </tr>   
+                <tr>
+                    <td colspan="3" align="center">
+                        <%= g.submit "Create Album", :class => 'submit' %>
+                    </td>
+                </tr>
+            </table>    
+        <% end %>
+    <% end %>
+</div>  
+<!--END OF  Pop-up to CREATE ALBUM -->
+<div id="backgroundPopup">
+</div>

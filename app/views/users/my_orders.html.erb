@@ -1,0 +1,54 @@
+<script>
+$(document).ready(function(){
+   $("#current_orders_link").click(function() {
+        $.ajax({
+            async : true,
+            type : 'GET',
+            url : "/users/" + <%= @user.id %> + "/get_current_orders",
+            success : function(data) {
+                $('.orders_data').html(data);
+            },
+            error : function(data) {
+            }
+        });
+        
+    });
+    $("#orders_history_link").click(function() {
+        $.ajax({
+            async : true,
+            type : 'GET',
+            url : "/users/" + <%= @user.id %> + "/get_orders_history",
+            success : function(data) {
+                $('.orders_data').html(data);
+            },
+            error : function(data) {
+            }
+        });
+        
+    }); 
+});
+</script>
+
+<div class="K_Dish_Display">
+    <div class="K_D_Head">
+        <h1 class="pull-left">Orders</h1>
+        <!-- <table class="pull-right" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td><a href="#" class="Btn_Add_M_Cart">Add selected meals to cart</a></td>
+            </tr>
+        </table> -->
+
+        <div class="clearfix"></div>
+        <div class="K_D_Filter_Row">
+            <a style="cursor: pointer;" id ="current_orders_link">Current Orders</a>
+            <a style="cursor: pointer;" id ="orders_history_link">Orders History</a>
+        </div><!--K_D_Filter_Row-->
+    </div><!--end K_D_Head -->
+    <div class="inner">
+        <div id="MyBasketWraper" class="orders_data">
+            <%= render :partial => 'orders/orders_list', :locals => {:orders =>@orders } %>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div><!-- end K_Dish_Display -->
+

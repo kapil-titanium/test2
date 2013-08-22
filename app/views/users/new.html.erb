@@ -1,0 +1,266 @@
+<script type="text/javascript">
+	function add_fields(link, association, content) {
+		var new_id = new Date().getTime();
+		var regexp = new RegExp("new_" + association, "g")
+		$(link).before(content.replace(regexp, new_id));
+	}
+
+	function remove_fields(link) {
+		// $(link).parent().siblings().hide()
+		$(link).parents('.fields').remove();
+	}
+
+</script>
+<!-- <div class="left"> -->
+	<div id="RC_Reg_Wraper">
+		<div id="RC_Reg_Box">
+			<% if @user.errors.any? %>
+            <% @user.errors.full_messages.each do |msg| %>
+            <p style="font-size: 12px;color: red;">
+                <b><%= msg %></b>
+            </p>
+            <% end %>
+            <% end %>
+			<%= form_for(@user, :validate => true , :url => users_path ) do |f| %>
+			
+			<div align="right">
+                 <font style="color: red;">*</font><font> Mark indicate fields are mandatory</font>
+            </div>
+            <hr />
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+                <td colspan="2">
+                    <h1>Consumer Registration</h1>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td colspan="2">
+                    <h4>Login Details</h4>
+                </td>
+            </tr>
+			<%= fields_for :login, @user.login do |l| %>
+			<tr>
+                <td>
+                    <label class="subhead">Email Id<span style="color: red; font-size: 11.5px"> *</span>
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :primary_email_id, :class => '', :id => 'email', :title => 'Enter e-mail', :placeholder => 'example@rasoiclub.com', :style => "width:235px;" %>
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    <label class="subhead">Mobile Number<span style="color: red; font-size: 11.5px"> *</span>
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :primary_mobile_number, :class => 'only_numerics', :style => "width:235px;" %>
+                </td>
+            </tr>
+			<% end %>
+			<tr><td colspan="2"><hr /></td></td></tr>
+			<tr>
+                <td colspan="2">
+                    <h4>Personal Details</h4>
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    <label class="subhead">First Name
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :first_name, :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Middle Name
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :middle_name, :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Last Name
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :last_name, :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Gender
+            </label>
+                </td>
+                <td>
+                    <%= f.select :gender, GENDER.invert, :class => "", :prompt =>'Select', :style => "width:248px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">DOB
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :dob , :class => 'dobdatepick', :style => 'margin-right: 5px; width: 235px;', :readonly => true %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Marital Status
+            </label>
+                </td>
+                <td>
+                    <%= f.select :marital_status, MARITAL_STATUS.invert, :class => '', :prompt =>'Select', :style => "width:248px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Anniversary Date
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :anniversary_date , :class => 'dobdatepick', :style => 'margin-right: 5px; width:235px;', :readonly => true %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td colspan="2">
+                    <h4>Contact Details</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Alternate Email Id
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :alternate_email_id , :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Alternate Mobile Number
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :alternate_contact_number, :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td colspan="2">
+                    <h4>Address/es</h4>
+                </td>
+            </tr>
+            <%= f.fields_for :addresses do |address| %>
+                    <%= render "address_fields", :f => address %>
+            <% end %>
+            <tr>
+                <td colspan="2">
+                    <%= link_to_add_fields "Add Address", f, :addresses %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td colspan="2">
+                    <h4>Organization Details</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Company Name
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :company_name , :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Role/Designation
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :role_designation , :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Company Phone Number
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :company_phone_number , :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Extension Number
+            </label>
+                </td>
+                <td>
+                    <%= f.text_field :company_extension_number , :class => '', :style => "width:235px;" %>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr /></td></td></tr>
+            <tr>
+                <td colspan="2">
+                    <h4>Other Details</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Food Type
+            </label>
+                </td>
+                <td>
+                    <%= f.radio_button :is_veg, true %> Vegetarian
+                    <%= f.radio_button :is_veg, false %> Non Vegetarian
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">Alerts
+            </label>
+                </td>
+                <td>
+                    <%= f.check_box :alerts , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="subhead">I agree with all the<a href="/Consumer_Terms_Conditions.pdf" target="_blank" >T&amp;C </a>
+            <sapn style="color: red;" >
+                *
+            </sapn>
+            </label>
+                </td>
+                <td>
+                    <%= f.check_box :terms_conditions , :class => '' %>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <%= f.submit('Submit', :action => 'create', :class => "Regbtn" ) %>
+                </td>
+            </tr>
+			</table>
+			<% end %>
+		</div><!--RC_Login_Box-->
+		<div class="clear"></div>
+	</div>
+	<!--End Registration form-->
+
+	<div class="clear"></div>
+<!-- </div> --><!-- END LEFT COL OF MAIN CONTENT-->
+
+<!-- <div class="right">
+
+</div> --><!-- END RIGHT SIDE BAR COL OF MAIN CONTENT-->
+<div class="clear"></div>

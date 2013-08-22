@@ -1,0 +1,39 @@
+<div id="dish_item_div">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2" style="background:#fef7ea;">
+	        <tr style="background:#900; color:#fff; text-align:left;">
+	            <th style="width:42px;">&nbsp;</th> <th>Meal Name</th> <th>Kitchen Name</th> <th>Menu Type</th> <th>Category</th> <th>Price (INR)</th> <th>Quantity</th> <th>Total</th> <th style="width:40px;">Action</th>
+	        </tr>
+    	<%  basket = get_current_basket 
+   			basket.line_items.each do | line_item |
+   				meal = line_item.meal_category.meal
+   				kitchen = meal.kitchen
+   				 		
+    	%>
+	    	
+	       <tr style="border-bottom:1px solid #900;">
+	        	
+	        	<td><% if meal.picture.present? %>
+	        		<img src="<%= meal.picture.image.mealPic.url %>" width="220" height="90" />
+	        			<!-- < %= meal.picture.image.ico.url % > -->
+	        		<% else %>
+ 		        		<img src="/assets/Thumbs/thmb_blank_plate.jpg" width="220" height="90" />	
+	        		<% end %>		
+	        	</td>
+	            
+	            <td align="center"><%= meal.meal_name %></td>
+	            <td align="center"><%= kitchen.kitchen_name %></td>
+	            <td align="center"><%= meal.sub_menu.menu.menu_name %></td>
+	            <td align="center"><%= line_item.meal_category.category.category_name %></td>
+	            <td align="center"><%= line_item.unit_price %></td>
+	            <td align="center"><%= line_item.quantity %></td>
+	            <td align="center"><%= line_item.total_price %></td>
+	            <td><a href="#" class="removebtn" title="Remove Dish"></a></td>
+	       </tr>
+	       <% if @error_hash.present? && @error_hash.has_key?( line_item.id.to_s ) %>
+		       <tr >
+		       	<td colspan="9" style="color: red"><%= @error_hash[line_item.id.to_s] %></td>
+		       </tr>
+	       <% end %>
+       <% end if basket.present? %>
+  </table>
+</div>

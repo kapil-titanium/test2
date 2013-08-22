@@ -1,0 +1,31 @@
+<!--Start of User Input Block-->
+<% area = Area.find(session[:user_input][:area_id].to_i) if session[:user_input].present? && session[:user_input][:area_id].present? %>
+<table>
+	<tr style="font-size:16px;">
+		<td width="50%">My City </td>
+		<td>My loccation </td>
+		<td rowspan="2"><!-- <img src="assets/images/icon/locationpin.png" width="40" height="40" /> --></td>
+	</tr>
+	
+	<tr style="font-size:20px; color:#cc0000;">
+		<td > <%=  (session[:user_input].present? && session[:user_input][:city].present?) ? City.find(session[:user_input][:city]).city_name : "None" %></td>
+		<td> <%= area.present? ? area.area_name.titleize : "None" %> </td>
+	</tr>
+	
+	<tr style="font-size:16px;">
+		<td>PIN Code </td>
+		<td colspan="2">Date of Delivery </td>
+	</tr>
+	
+	<tr style="font-size:20px; color:#cc0000;">
+		<td><%= area.present? ? area.pincode : "None" %> </td>
+		<td colspan="2"><%= session[:user_input].present? && session[:user_input][:delivery_date].present? ? session[:user_input][:delivery_date] : "None" %>  </td>
+	</tr>
+	
+	<tr>
+		<td colspan="3">
+			<a rel="change_criteria_popup" id="change_user_input" class="topopup changesrch">Change Input</a>
+		</td>
+	</tr>
+</table>
+<!--End of User Input Block-->

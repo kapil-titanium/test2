@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dev.WildMushroom.com/!svn/ver/3642/branches/dev.innovation.rasoiclub.com/app/views/orders
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dev.WildMushroom.com/!svn/ver/3430/branches/dev.innovation.rasoiclub.com/app/views/orders/show.html.erb
+END
+_orders_list.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/dev.WildMushroom.com/!svn/ver/3503/branches/dev.innovation.rasoiclub.com/app/views/orders/_orders_list.html.erb
+END
+bill_info.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/dev.WildMushroom.com/!svn/ver/3430/branches/dev.innovation.rasoiclub.com/app/views/orders/bill_info.html.erb
+END
+_orders_change_status.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/dev.WildMushroom.com/!svn/ver/3475/branches/dev.innovation.rasoiclub.com/app/views/orders/_orders_change_status.html.erb
+END
+_order_details.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/dev.WildMushroom.com/!svn/ver/3642/branches/dev.innovation.rasoiclub.com/app/views/orders/_order_details.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/dev.WildMushroom.com/!svn/ver/3475/branches/dev.innovation.rasoiclub.com/app/views/orders/index.html.erb
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dev.WildMushroom.com/!svn/ver/3705/branches/dev.innovation.rasoiclub.com/app/views/kitchens
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/dev.WildMushroom.com/!svn/ver/3652/branches/dev.innovation.rasoiclub.com/app/views/kitchens/new.html.erb
+END
+show.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/dev.WildMushroom.com/!svn/ver/3450/branches/dev.innovation.rasoiclub.com/app/views/kitchens/show.html.erb
+END
+profile_setting.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/dev.WildMushroom.com/!svn/ver/3690/branches/dev.innovation.rasoiclub.com/app/views/kitchens/profile_setting.html.erb
+END
+edit.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/dev.WildMushroom.com/!svn/ver/3663/branches/dev.innovation.rasoiclub.com/app/views/kitchens/edit.html.erb
+END
+_kitchen_header.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/dev.WildMushroom.com/!svn/ver/3673/branches/dev.innovation.rasoiclub.com/app/views/kitchens/_kitchen_header.html.erb
+END
+_kitchen_meals.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dev.WildMushroom.com/!svn/ver/3400/branches/dev.innovation.rasoiclub.com/app/views/kitchens/_kitchen_meals.html.erb
+END
+_kitchen_overview.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/dev.WildMushroom.com/!svn/ver/3705/branches/dev.innovation.rasoiclub.com/app/views/kitchens/_kitchen_overview.html.erb
+END
+_change_status.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/dev.WildMushroom.com/!svn/ver/3524/branches/dev.innovation.rasoiclub.com/app/views/kitchens/_change_status.html.erb
+END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dev.WildMushroom.com/!svn/ver/3472/branches/dev.innovation.rasoiclub.com/app/views/kitchens/index.html.erb
+END

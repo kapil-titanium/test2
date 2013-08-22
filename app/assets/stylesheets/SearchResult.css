@@ -1,0 +1,217 @@
+@charset "utf-8";
+#SearchPanel{
+	display:none;
+	margin:0 20px;
+	width:660px;
+	}
+.AdvanceSearch{
+	float:right;
+	display:inline-block;
+	font-size:14px;
+	padding:3px;
+	color:#555!important;
+	font-weight:normal;
+	background:url(bg_btn_details.jpg);
+	border:1px solid #878d59;
+	text-decoration:none!important;
+	}
+.closeAdvanceSearch{
+	float:right;
+	display:inline-block;
+	font-size:14px;
+	display:none;
+	padding:3px;
+	color:#555!important;
+	font-weight:normal;
+	background:url(bg_btn_details.jpg);
+	border:1px solid #878d59;
+	text-decoration:none!important;
+	}
+#SearchPanel td{
+	height:30px;}	
+.SR_Block h2{
+	margin:0 0 2px 0 !important;
+	width:220px;
+	color:#F00;
+	float:left;
+	}
+.SR_Row{
+	width:660px;
+	height:145px;
+	display:block;
+	clear:both;
+	padding-bottom:10px;
+	border-bottom:1px solid #ccc;
+}
+.SR_Block{
+	width:213px;
+	height:145px;	
+	border:0px solid #222;	
+	margin:0 3px 0 3px;
+	
+	/* required to hide the image after resized */
+	overflow:hidden;
+	
+	/* for child absolute position */
+	position:relative;
+	
+	/* display div in line */
+	float:left;
+	}
+.SR_Block img{
+	margin-top:25px;
+	margin-left:-220px;
+	position:absolute;
+	}
+
+.caption {
+	width:220px;
+	height:70px;
+	background:url(bg_dish_thmb_nav.png);
+	color:#fff;
+	font-weight:bold;
+	border-top:1px solid #000;
+	/* fix it at the bottom */
+	position:absolute;
+	bottom:-1px; /* fix IE issue */
+	left:0;
+	/* hide it by default */
+	display:none;
+}
+.btn_RefineSrch, .btn_dish_order, .btn_sub{
+	margin:5px auto;
+	display:block;
+	text-align:center;
+	width:100px;
+	height:25px;
+	padding-top:3px;
+	color:#555!important;
+	font-weight:normal;
+	background:url(bg_btn_details.jpg);
+	border:1px solid #878d59;
+	text-decoration:none!important;
+	}
+.btn_RefineSrch:hover, .btn_dish_order:hover, .btn_sub:hover{
+	background:url(bg_btn_details.jpg);
+	color:#000!important;
+	border:1px solid #878d59;
+	text-decoration:none!important;
+	}
+
+#DishDetail{
+	font-size:12px;
+	color:#666;
+	}
+
+#DishDetail h1{
+	margin:0px;
+	color:#F00;
+	}
+img.bigthumb{
+	margin:30px 0 0 20px!important;
+	}
+.addFav{
+	width:30px;
+	height:30px;
+	display:block;
+	position:relative;
+	float:right;
+	top:-195px;
+	right:7px;
+	background:url(AddFav_n.png) center no-repeat;
+	}
+.addFav:hover{
+	background:url(AddFav_o.png) center no-repeat;
+	}
+
+.btn_sub{
+	width:auto!important;
+	}
+	
+/*--- style meal detail view popup ----*/
+
+#meal_detail_wraper{
+    width:770px;
+    height:auto;
+    margin:0 10px;
+    /*background:#0C3;*/
+    }   
+
+#meal_detail_wraper .row_full{
+    margin:0 0 5px 0;
+    width:100%;
+    height:auto;
+    /*background:#9C0;*/
+    display:block;
+    vertical-align:top;
+    }
+
+
+#meal_detail_wraper .col_1{
+    margin:0 4px;
+    width:240px;
+    height:auto;
+    /*background:#CC0;*/
+    display:inline-block;
+    vertical-align:top;
+    }
+
+#meal_detail_wraper .col_2{
+    margin:0 4px 0 0;
+    width:490px;
+    height:auto;
+    /*background:#C39;*/
+    display:inline-block;
+    vertical-align:top;
+    }
+
+#meal_detail_wraper .col_tiny{
+    margin:0 15px;
+    width:auto;
+    height:20px;
+    /*background:#F30;*/
+    display:inline-block;
+    vertical-align:top;
+    }
+#meal_detail_wraper input[type=checkbox]{
+    margin-top:-5px;
+    }
+
+label.mealhead{
+    margin-top:7px;
+    display:block;
+    font-size:20px;
+    color:#990000;
+    font-family: ColabThi;
+    }
+    
+.ASR_Row{
+ width:660px;
+ height:auto;
+ display:block;
+ clear:both;
+ margin-bottom:2px;
+}
+.ASR_Colm{
+ margin-right:2px;
+ width:150px;
+ display:inline-block;
+ height:auto;
+ padding:5px;
+ }
+ 
+.ASR_Colm_block{
+ width:auto;
+ height:auto;
+ display:block;
+ clear:both;
+ margin-bottom:2px;
+}
+.left_side{
+	display: inline;
+	width: 200px;
+}
+.right_side{
+	// margin-left: 120px;
+	display: inline;
+}

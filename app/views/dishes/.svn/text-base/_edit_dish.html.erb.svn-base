@@ -1,0 +1,24 @@
+<!-- < % = javascript_include_tag 'script-popup' % >
+< % = stylesheet_link_tag 'style-popup' % > -->
+<div id="edit_dish_popup" class="popup_block custom content" style="width: 350px;margin-left: -200px;margin-top: 50px">
+	<%= form_for( [@kitchen, @dish], :validate => true ) do |f| %>
+		<a href="#" class="avgrund-close"></a>
+		<h3>Edit Dish</h3>
+		<h5>Please Select the information for your dish:</h5>
+		<table>
+			<tr>
+				<td>Dish Name</td>
+				<td>:</td>
+				<td> <%= f.text_field :dish_name %></td>
+			</tr>
+			<tr>
+				<td>Course</td>
+				<td>:</td>
+				<td><%= f.select :course_id, options_from_collection_for_select(@courses, 'id', 'course_name', @dish.course.id) %></td>
+			</tr>	
+			<tr>
+				<td colspan="3" align="center"><%= f.submit "Save Dish", :class => "submit" %></td>
+			</tr>
+		</table>	
+	<% end %>
+</div>

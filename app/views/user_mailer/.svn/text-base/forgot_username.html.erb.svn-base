@@ -1,0 +1,15 @@
+<p>
+    Dear <%= @user.get_name_or_email %>,
+</p>
+<p>
+    Your username for Rasoi Club<br />
+    <label class="labelcol">Username: <%= @user.primary_email_id %></label>
+</p>
+<p>
+    <br />
+    Regards,<br />
+    Rasoi Club Support<br />
+    www.rasoiclub.com<br />
+    A product of Online Rasoi Pvt. Ltd.<br/><br />
+    This is a system generated mail. Please do not reply.
+</p>

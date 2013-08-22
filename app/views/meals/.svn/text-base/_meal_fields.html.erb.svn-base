@@ -1,0 +1,131 @@
+<script type="text/javascript">
+    function set_preview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgPreview').attr('src', e.target.result);
+                $('#imgPreview').show();
+                $('#imgPreviewLbl').css('display', 'block');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+	<input type="hidden" id="kitchenID" value="<%= @kitchen.id %>">	
+	<tr>
+		<td colspan="3"><h1>Meal Details</h1></td>
+	</tr>
+
+	<tr style="text-align:center;">
+		<td><label class="subhead">Meal Name</label></td>
+		<td><label class="subhead">Menu</label></td>
+		<td><label class="subhead">Sub Menu</label></td>
+	</tr>
+
+	<tr style="text-align:center;">
+		<td> <%= f.text_field :meal_name, :style => "width:235px;" %> </td>
+		<td> <%= select_tag 'menu', options_from_collection_for_select(@menus, :id, :menu_name, @meal.sub_menu.present? ? @meal.sub_menu.menu.id : 0), :prompt => 'Select Menu', :id => 'menu', :style => "width:250px;" %> </td>
+		<td id='sub_menu_div'> <%= render :partial => 'sub_menu_partial' %> </td>
+	</tr>
+	<!-- Dishes Show Portion -->
+	<tr id="display_dishes_div">
+		<td colspan="3"> <%= render :partial => 'kitchen_dishes', :locals => {:courses => @courses, :dishes => @dishes, :sub_menu => ((@meal.present? && @meal.sub_menu.present?) ? @meal.sub_menu : ""), :meal => (@meal.present? ? @meal : nil) } %>
+		</td>
+	</tr>
+	<!-- End -->
+	<tr style="text-align:center;">
+		<td><label class="subhead">Spicy level</label></td>
+		<td><label class="subhead">Price for kitchen only</label></td>
+		<td><label class="subhead">Serving Size</label></td>
+	</tr>
+	<tr style="text-align:center;">
+		<td> <%= f.select :spicey_level, options_for_select(SPICY_LEVEL, @meal.spicey_level), :style => "width:250px;", :prompt => 'Select Spicy Level' %> </td>
+		<td> <%= f.text_field :kitchen_price, :class => "only_float", :id => "kitchen_price", :style => "width:235px;" %> </td>
+		<td> <%= f.text_field :serving_size, :style => "width:235px;", :id => 'serving_size' %> </td>
+	</tr>
+
+	<tr valign="top" style="text-align:center;">
+        <td><label class="subhead">Cuisine</label></td>
+        <td><label class="subhead">Status</label></td>
+        <td><label class="subhead">Description</label></td>
+    </tr>
+    <tr valign="top" style="text-align:center;">
+        <td><%= f.select :cuisine, options_for_select(CUISINE, @meal.cuisine), :style => "width:250px;", :prompt => 'Select Cuisine Type' %></td>
+        <td><%= f.select :status, options_for_select(MEAL_STATUS.invert), :style => "width:250px;" %></td>
+        <td> <%= f.text_area :description, :cols => '3', :rows => '3', :style => "width:235px;" %> </td>
+    </tr>
+    <tr valign="top" style="text-align:center;">
+        <td><label class="subhead">Minimum Capacity</label></td>
+        <td><label class="subhead">Maximum Capacity</label></td>
+    </tr>
+    <tr valign="top" style="text-align:center;">
+        <td> <%= f.text_field :min_capacity, :class => "only_numerics", :style => "width:235px;", :readonly => true %> </td>
+        <td> <%= f.text_field :max_capacity, :class => "only_numerics", :style => "width:235px;", :readonly => true %> </td>
+    </tr>
+	<tr valign="top">
+		<td colspan="3"><label class="subhead">Dish Type</label></td>
+	</tr>	
+	<tr valign="top" style="text-align:left;">
+		<td colspan="3"><%= f.radio_button :is_veg, true, :checked=>true %> Vegetarian
+			<%= f.radio_button :is_veg, false %> Non Vegetarian</td>
+	</tr>
+	<tr valign="top">
+		<td colspan="3"><label class="subhead">Available Days</label></td>
+	</tr>
+	
+	<%= fields_for :week do |builder| %>
+	<tr valign="top" style="text-align:center;">
+		<td colspan="3">
+		<table width="100%" cellpadding="1" cellspacing="0" border="0">
+			<tr>
+				<td><%= builder.check_box :monday, :checked => @meal.week.monday ? true : false %></td>
+				<td>Monday</td>
+				<td><%= builder.check_box :tuesday, :checked => @meal.week.tuesday ? true : false %></td>
+				<td>Tuesday</td>
+				<td><%= builder.check_box :wednesday, :checked => @meal.week.wednesday ? true : false %></td>
+				<td>Wednesday</td>
+				<td><%= builder.check_box :thursday, :checked => @meal.week.thursday ? true : false %></td>
+				<td>Thursday</td>
+				<td><%= builder.check_box :friday, :checked => @meal.week.friday ? true : false %></td>
+				<td>Friday</td>
+				<td><%= builder.check_box :saturday, :checked => @meal.week.saturday ? true : false %></td>
+				<td>Saturday</td>
+				<td><%= builder.check_box :sunday, :checked => @meal.week.sunday ? true : false %></td>
+				<td>Sunday</td>
+			</tr>
+		</table></td>
+	</tr>
+	<tr valign="top">
+        <td colspan="3"><label class="subhead">Meal Picture</label></td>
+    </tr>
+	<tr>
+	    <td>
+	        <%= f.fields_for :picture, @picture do |p| %>
+            <div class=" fileupload-buttonbar">
+              <div class="progressbar fileupload-progressbar nofade"><div style="width:0%;"></div></div>
+              <span class="btn btn-mini fileinput-button">
+                <i class="icon-plus"></i>
+                <span><%= t('photos.select_picture') %>...</span>
+                <%= p.file_field :image, :onchange=>"set_preview(this);" %>        
+              </span>
+            </div>
+            <% end %>
+        </td>
+        <% if @picture.present? && @picture.id.present? %>
+        <td>
+            <img id="" src="<%= @picture.image.mealPic.url %>" alt="image" style="width: 220px; height: 90px;" />
+            <label style="display: block">Current Image</label>
+        </td>
+        <% end %>
+        <td>
+            <img id="imgPreview" src="#" alt="image" style="width: 220px; height: 90px; display: none" />
+            <label id="imgPreviewLbl" style="display: none; ">New Image</label>
+	    </td>
+	</tr>
+	<% end %>
+</table>
+

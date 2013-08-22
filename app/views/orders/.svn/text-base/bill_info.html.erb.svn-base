@@ -1,0 +1,8 @@
+<div id="MyBasketWraper">
+    <h1 style="color:#990000;">Invoice</h1>
+    <%= render :partial => '/orders/order_details', :locals => {:order => @order} %>
+    <div style="margin: 10px auto; display: inline-block ; text-align: center; color: #f00; font-weight: bold; width: 800px;">
+        Thankyou for placing order with Rasoi Club.<br />An email containing your copy of invoice is been sent on your registered email id.
+    </div>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,7 @@
+<div>
+    <%= link_to 'New Address', new_user_address_path %>
+</div>
+
+<% @addresses.each do |a| %>
+    <%= render :partial => 'address_show_form', :locals => {:address => a, :user => @user} %>
+<% end %>

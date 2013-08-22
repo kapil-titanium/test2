@@ -1,0 +1,33 @@
+<div class="K_Dish_Display">
+    <div class="K_D_Head">
+        <h1 class="pull-left">
+            <a href="<%= employee_path(@employee) %>" style="text-decoration: none; color: inherit" path = "/orders/get_all_orders">Employee Section</a>
+        </h1>
+        <!-- <table class="pull-right" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td><a href="#" class="Btn_Add_M_Cart">Add selected meals to cart</a></td>
+            </tr>
+        </table> -->
+
+        <div class="clearfix"></div>
+        <div class="K_D_Filter_Row" style="border-bottom: 1px #DDDDDD solid;">
+            <a href="<%= kitchens_path %>" >Kitchens</a>
+        </div>
+        <div class="K_D_Filter_Row path_link">
+            <a style="cursor: pointer;" path = "/kitchens/get_kitchens" >All</a>
+            <a style="cursor: pointer;" path = "/kitchens/new_registrations" >New Registrations</a>
+            <a style="cursor: pointer;" path = "/kitchens/unapproved" >Pending Approval</a>
+            <a style="cursor: pointer;" path = "/kitchens/to_be_activated" >Pending Activation</a>
+            <a style="cursor: pointer;" path = "/kitchens/activated" >Activated</a>
+            <a style="cursor: pointer;" path = "/kitchens/suspend" >Suspanded</a>
+            <a style="cursor: pointer;" path = "/kitchens/rejected" >Rejected</a>
+        </div><!--K_D_Filter_Row-->
+    </div><!--end K_D_Head -->
+    <div class="inner">
+        <div id="MyBasketWraper" class="orders_data">
+            <%= render :partial => '/kitchens/change_status', :locals => {:kitchens => @kitchens, :active_cities => nil} %>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div><!-- end K_Dish_Display -->
+<!--End Profile Info-->

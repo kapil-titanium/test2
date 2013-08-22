@@ -1,0 +1,15 @@
+<p>
+	Dear <%= "#{@kitchen.primary_contact_name.capitalize} #{@kitchen.last_name.capitalize}" %>,
+</p>
+<p>
+	Congratulations!<br /> Your kitchen <b>"<%= @kitchen.kitchen_name %>"</b> has been activated. Please actively track your orders now.<br />
+	<br />Wishing you good luck.<br />
+	For any queries on order, please contact Rasoi Club Operations Team at 98817-37978.
+</p>
+<p>
+	<br />
+	Regards,<br />
+	Rasoi Club Operations Team<br />
+	www.rasoiclub.com<br /><br />
+	This is a system generated mail. Please do not reply.
+</p>

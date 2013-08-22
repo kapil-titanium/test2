@@ -1,0 +1,71 @@
+<%= render :partial => "searches/meal_details.js" %>
+<!--Start Profile Info-->
+<div class="K_Dish_Display">
+	<div class="K_D_Head">
+		<h1 class="pull-left">Meals</h1>
+		<!-- <table class="pull-right" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td><a href="#" class="Btn_Add_M_Cart">Add selected meals to cart</a></td>
+			</tr>
+		</table> -->
+
+		<div class="clearfix"></div>
+		<div class="K_D_Filter_Row">
+			<!-- <a href="#">All</a><a href="#">Party</a><a href="#">Treat</a><a href="#">Dinner</a><a href="#">Lunch</a><a href="#">Breakfast</a> -->
+		</div><!--K_D_Filter_Row-->
+	</div><!--end K_D_Head -->
+	<div class="inner">
+		<% meal_count = 0 %>
+        <% if meals.present? %>
+            <% meals.each do |meal| %>
+                <% if (meal.status == MEAL_STATUS_ACTIVE) && meal.categories.present? %>
+            		<% meal_count = meal_count + 1 %>
+            		<div class="mealblockA">
+            			<label><%= meal.meal_name.titleize %></label>
+            			<!-- <div class="pull-right" style="margin-right:10px;">
+            				<input name="" type="checkbox" value="" />
+            			</div> -->
+            
+            			<div class="mealthumb">
+            				<img src="<%= meal.picture.present? ? meal.picture.image.mealPic.url : "/assets/Thumbs/thmb_blank_plate.jpg" %>" width="220" height="90" />
+            			</div><!--end mealthumb-->
+            			<div class="mealinfo">
+            				<div class="m-disc">
+            					<%= meal.description.present? ? meal.description : "No description available." %>
+            				</div><!--end m-disc-->
+            				<label style="font-size:18px; color:#333;"><%= meal.cuisine.titleize %></label><label style="float:right; font-size:18px; color:#333;"><%= meal.sub_menu.sub_menu_name.titleize %></label>
+            				<div class="clearfix" style="margin:7px 0;"></div>
+            				<% category = meal.get_low_price_meal_category %>
+            				<label style="font-size:18px; color:#333;">Price @ :</label>
+            				<label style="font-size:25px; color:#F00;"><%= meal.meal_categories.find_by_category_id(category.id).rc_total_price %>/-*</label>
+            				<div class="<%= meal.is_veg? ? 'iconVeg' : 'iconNonVeg' %>"></div>
+            				<a href="#" rel="meal_detail_popup" class="btn-knowmore topopup meal_detail" id=<%= meal.id %> >Know More</a>
+            				<hr />
+            				<!-- <label style="font-size:16px; color:#333;">Available in categories :</label>
+            				<div class="m-category">
+                                < % = meal.get_meal_categories.join(', ') % >
+                            </div> -->
+                            <div align="right">
+                                <label style="font-size:10px; color:#333; display: block;">(*For <%= category.category_name %>.)</label>
+                            </div>
+            			</div><!--end mealinfo-->
+            		</div><!--end mealblockA-->
+        		<% end %>
+    		<% end %>
+		<% end %>
+		<% if meal_count == 0 %>
+		  No meals available.
+		<% end %>
+		
+		<div class="clearfix"></div>
+	</div>
+</div><!-- end K_Dish_Display -->
+
+<!--End Profile Info-->
+
+<div class="clear"></div>
+
+<div id="meal_details_div" >
+</div>
+<div id="backgroundPopup">
+</div>

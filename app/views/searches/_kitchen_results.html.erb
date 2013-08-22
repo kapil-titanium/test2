@@ -1,0 +1,12 @@
+<!--Open show open  Kitchen Block -->
+<div class="SB_Ktn_Block">
+	<h4 style="color:#fff;">Kitchens</h4>
+	<% if kitchens.present? %>
+		<% kitchens.each do |k| %>
+			<div class="SB_Ktn_Thumbs">
+				<a href="<%= kitchen_path(k) %>"><img src=<%= k.profile_pic.nil? ? '/assets/kitchen/LogoFace.jpg' : k.profile_pic.image.thumb.url %> width="40" height="40" title = <%= k.kitchen_name.titleize %> /></a>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+<!--End of open  Kitchen Block -->

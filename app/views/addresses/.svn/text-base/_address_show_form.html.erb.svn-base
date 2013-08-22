@@ -1,0 +1,55 @@
+<script>     
+
+function deleteAddress(me)
+    {       
+        iDiv = me.parentNode;
+        //alert(iDiv.outerHTML);
+                                    
+        $.ajax({
+          url: $(me).attr('href'),
+          type: 'DELETE',
+          success: function(e) {
+            $(iDiv).fadeOut(1000);   
+          }
+        });     
+        
+        return false;
+    }
+    function onHover(me)
+    {       
+        $(me).toggleClass('divonhover');
+        return false;
+    }
+</script>
+
+<div class="addressbox" onmouseover="onHover(this);" onmouseout="onHover(this);">
+    <div style="background-color: #EEEECC"><%= address.name.capitalize %></div>
+    <% if !address.line1.blank? %>
+        &nbsp;<%= address.line1 %></br>
+    <% end %>
+    <% if !address.line2.blank? %>
+        &nbsp;<%= address.line2 %></br>
+    <% end %>
+    <% if !address.line3.blank? %>
+        &nbsp;<%= address.line3 %></br>
+    <% end %>
+    <% if !address.landmark.blank? %>
+        &nbsp;<%= address.landmark %></br>
+    <% end %>
+    <% if !address.area.blank? %>
+        &nbsp;<%= address.area %></br>
+    <% end %>
+    <% if !address.city.blank? %>
+        &nbsp;<%= address.city %></br>
+    <% end %>
+    <% if !address.state.blank? %>
+        &nbsp;<%= address.state %></br>
+    <% end %>
+    <% if !address.pincode.blank? %>
+        &nbsp;<%= address.pincode %></br>
+    <% end %>
+    <% if !address.country.blank? %>
+        &nbsp;<%= address.country %></br>
+    <% end %>       
+    <%= link_to image_tag('icon/color_icon/edit.png', :title => 'Edit'), edit_user_address_path(user, address), :class=> 'clsedit', :onclick => 'getAddress(this); return false;' %> &nbsp; <%= link_to image_tag('icon/color_icon/delete.png', :title => 'Delete'), user_address_path(user, address), :class => 'clsdelete', :onclick => 'deleteAddress(this); return false;' %>     
+</div>

@@ -1,0 +1,68 @@
+<script>
+    function autoAdjustOtherFields() {
+        if ($('#menu_dinner').prop('checked')) {
+            $('#delivery_time_div').hide('slow');
+        } else {
+            $('#delivery_time_div').show('slow');
+        }
+    }
+    $(document).ready(function () {
+        $('.menu_radio').change(function(){
+            autoAdjustOtherFields();
+        });
+        
+        $('#change_user_input').click(function(){
+            autoAdjustOtherFields();
+        });
+    });
+</script>
+<!-- Pop-up For Change User Input -->
+<div class="popup_block content" id="change_criteria_popup" style="width: 350px; margin-left: -200px; margin-top: 50px">
+	<%= form_tag "/application/save_user_criteria_form", :id => 'change_input' do %>
+		<a href="#" class="avgrund-close"></a>
+		<h3>Select Menu *</h3>
+		<h5>Please Select the information :</h5>
+		<div class="menu_radio">
+			<% Menu.all.each do |m| %>
+				<%= radio_button_tag 'menu', "#{m.menu_name}", ( session[:user_input].present? && session[:user_input][:menu].present? && (m.menu_name.casecmp(session[:user_input][:menu]) == 0) ? true : false) %>  <%= " #{m.menu_name} " %>
+			<% end %>
+		</div>
+		<br/>
+		
+		<div>
+			<div>
+				Delivery Area *
+			</div>
+			<div>
+				<%= collection_select "", :area_id_by_area, Area.where(:status => AREA_STATUS_ACTIVE).to_a.uniq{|x| x.area_name}.sort{|a,b| a.area_name <=> b.area_name}, :id, :area_name_titleized, {:prompt => (session[:user_input] && session[:user_input][:area_id].present?) ? false : "Select Delivery Area", :selected => (session[:user_input] && session[:user_input][:area_id].present?) ? session[:user_input][:area_id].to_i : ""}, {:class => "delivery_area_select_box select_box_design", :id => 'change_popup_delivery_area'} %>
+			</div>
+		</div>
+		<div id="pincode_dropdown_div" style="display: none">
+			<!-- Here contents for dropdown are generated dynamically -->
+		</div>
+		<br />
+		
+		<div>
+			<div>
+				Delivery Date
+			</div>
+			<div>
+				<%= text_field_tag :delivery_date, (session[:user_input] && session[:user_input][:delivery_date].present?) ? session[:user_input][:delivery_date] : "", :placeholder => "Select Delivery Date", :class => "datepick", :style => "width: 178px; margin-right: 10px;", :readonly => true, :id => 'delivery_date_id' %>
+			</div>
+		</div>
+		
+		<div id="delivery_time_div" style="display: <%= 'none' if session[:user_input][:menu] == MENU_NAME_DINNER %>">
+			<div>
+				Delivery Time
+			</div>
+			<div>
+				<%= select_tag :delivery_time, options_for_select(DELIVERY_TIMES), :class =>'select_box_design' %>
+				<br />
+			</div>
+		</div>
+		<div>
+			<%= submit_tag "Submit", :id => 'change_input_id', :class => 'btn-srch_order change' %>
+		</div>
+	<% end %>
+</div>
+<!-- End Of Pop-up For Change User Input -->

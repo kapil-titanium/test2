@@ -1,0 +1,65 @@
+<script>
+	$(document).ready(function(){
+		$('.kitchen_open_close').click(function(){
+			kitchenID = $(this).attr('id');
+			if(!jQuery.isEmptyObject(kitchenID)){					
+				$.ajax({
+					async : true,
+					type : 'GET',
+					url : "/kitchens/kitchen_open_close/" + kitchenID,
+					success : function(data) {
+						$('#kitchen_header_div').html(data);
+					},
+					error : function(data) {
+					}
+				});
+			}		
+		});
+		
+	});
+</script>
+<div id="kitchen_header_div">
+	<div id="SummeryBlock">
+		<div class="K_profilePic">
+		    <% if kitchen.profile_pic.nil? %>
+	        <img src="/assets/kitchen/LogoFace.jpg" id="eventDetail_pic_KV"/>
+	        <% else %>
+	        <img src="<%= kitchen.profile_pic.image.profilePic.url %>" id="eventDetail_pic_KV"/>
+	        <% end %>
+		</div><!--End profilePic_K-->
+	
+		<div class="K_ProfileInfo">
+			<h1><%= kitchen.kitchen_name %></h1>
+			<% if !kitchen.is_open %><label class="lbl_kitStt" style="display:block;">This kitchen is temporarily closed.</label><% end %>
+			<small><%= kitchen.tag_line if kitchen.tag_line.present? %></small>
+			<!-- <small>Tag Line1</small> -->
+		</div><!--end K_ProfileInfo-->
+		<% if can? :edit, kitchen %>
+		<a class="<%= kitchen.is_open ? "Btn_KitStA" : "Btn_KitStD" %> pull-right kitchen_open_close" title="<%= kitchen.is_open ? "Close" : "Open" %> kitchen" id="<%= kitchen.id %>"></a>
+	    <!-- <a class="Btn_KitStD pull-right button_status_change" title="Open kitchen" style="display:none;"></a> -->
+		<a class="Btn_ProEdit pull-right" href="<%= edit_kitchen_path(kitchen) %>" title="Edit Profile"></a>
+		<a class="Btn_Setting pull-right" href="<%= kitchen_profile_setting_path(kitchen) %>" title="Settings"></a>
+		<% else %>
+			<a class="Btn_KitStSpace pull-right"></a>
+		<% end %>
+		<ul id="K_SubMenu_H" class="pull-right">
+			<li>
+				<%= link_to 'Overview', kitchen_path(kitchen) %>
+			</li>
+			<% if can? :edit, kitchen %>
+			<li>
+	            <%= link_to 'Dishes', kitchen_dishes_path(kitchen) %>
+	        </li>
+			<li>
+				<%= link_to 'Meals', kitchen_meals_path(kitchen) %>
+			</li>
+			<% end %>
+			<li>
+				<%= link_to 'Albums', kitchen_galleries_path(kitchen) %>
+			</li>
+		</ul>
+	</div><!--end SummeryBlock-->
+	
+	<div class="clearfix"></div>
+	<!--<div class="right_big">-->
+</div>

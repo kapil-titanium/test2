@@ -1,0 +1,73 @@
+	<table width="100%" border="0" cellspacing="10" cellpadding="2" class="fields">
+		<tr>
+			<td width="215"><label class="subhead">Address Heading </label></td>
+			<td> <%= f.text_field :name, :style => "width:235px;" %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Address line1
+				<sapn style="color: red;" >
+					*
+				</sapn> </label></td>
+			<td> <%= f.text_field :line1, :title => 'Street address, P.O. box, company name, c/o', :style => "width:235px;" %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Address line2 </label></td>
+			<td> <%= f.text_field :line2, :title => 'optional', :style => "width:235px;" %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Address line3 </label></td>
+			<td> <%= f.text_field :line3, :title => 'optional', :style => "width:235px;"  %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Landmark </label></td>
+			<td> <%= f.text_field :landmark, :style => "width:235px;" %>
+			<br />
+			<sapn>
+				(Please specify landmark if any)
+			</sapn></td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Area
+				<sapn style="color: red;" >
+					*
+				</sapn> </label></td>
+			<td> <%= f.text_field :area, :title => 'Area', :style => "width:235px;" %> <!-- < % = f.autocomplete_field :area, autocomplete_area_name_searches_path, :class => '' % > --></td>
+		</tr>
+		<tr>
+			<td><label class="subhead">City
+				<sapn style="color: red;" >
+					*
+				</sapn> </label></td>
+			<td> <%= f.text_field :city, :title => 'City', :style => "width:235px;" %> <!-- < % = f.autocomplete_field :city, autocomplete_city_name_searches_path, :class => '' % > --></td>
+		</tr>
+		<tr>
+			<td><label class="subhead">State
+				<sapn style="color: red;" >
+					*
+				</sapn> </label></td>
+			<td> <%= f.select :state, STATES, {:include_blank => 'Select State'}, :class => "", :style => "width:248px;" %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Pin Code
+				<sapn style="color: red;" >
+					*
+				</sapn> </label></td>
+			<td> <%= f.text_field :pincode, :style => "width:235px;", :class => 'only_numerics' %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Country
+				<sapn style="color: red;" >
+					*
+				</sapn> </label></td>
+			<td> <%= f.select :country, COUNTRY, {:include_blank => 'Select Country'}, :class => "", :style => "width:248px;" %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Set as Default </label></td>
+			<td> <%= f.check_box :is_default %> </td>
+		</tr>
+		<tr>
+			<td><label class="subhead">Remove Address </label></td>
+			<td> <%= link_to_remove_fields "Remove", f  %> </td>
+		</tr>
+		<tr><td colspan="2"><hr /></td></td></tr>
+	</table>

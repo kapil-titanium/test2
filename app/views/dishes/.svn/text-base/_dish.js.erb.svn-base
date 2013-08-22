@@ -1,0 +1,19 @@
+<script>
+$(document).ready(function(){
+	$('#create_dish_button').click(function(){
+		if( jQuery.isEmptyObject( $('#dish_name').val() ) ){
+			$('#dish_name_error').text('Please Select Dish Name');
+			return false;	
+		}else{
+			$('#dish_name_error').text('');
+		}
+		if( jQuery.isEmptyObject( $('#dish_course_id').find(":selected").val() ) ){
+			$('#course_id_error').text('Please Select Course Type');
+			return false;
+		}else{
+			$('#course_id_error').text('');
+		}
+		return true;
+	});
+});	
+</script>

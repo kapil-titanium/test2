@@ -1,0 +1,80 @@
+<script>
+    function validateFieldsToClose(current, orderId){
+        if( $(current).parents("#tr_order_" + orderId).find("#remark_field").val().trim() == "" ){
+            alert('Please mention Remarks to Close');
+            return false;
+        }
+        return true;
+    }
+    
+    function validateFieldsToCancel(current, orderId){
+        if( $(current).parents("#tr_order_" + orderId).find("#remark_field").val().trim() == "" ){
+            alert('Please mention Remarks to Cancel');
+            return false;
+        }
+        return true;
+    }
+    
+    function validateFieldsToSettle(current, orderId) {
+
+        var remark = $(current).parents("#tr_order_" + orderId).find("#remark_field").val().trim();
+        var totalPrice = parseFloat($(current).parents("#tr_order_" + orderId).find("#price_div_" + orderId).html().trim())
+        var amount = isNaN(parseFloat($(current).parents("#tr_order_" + orderId).find("#amount_field").val().trim())) ? 0.0 : parseFloat($(current).parents("#tr_order_" + orderId).find("#amount_field").val().trim())
+    
+        if (amount <= totalPrice && amount >= 0) {
+            
+            if (remark == "" && amount == 0.0) {
+                alert('Please enter remarks & amount');
+                return false;
+            } else if (remark != "" && amount == 0.0) {
+                alert('Please enter the amount');
+                return false;
+            } else if (remark == "" && amount != 0.0) {
+                alert('Please enter remarks');
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else
+        {
+            alert("Please enter valid amount!!!");
+            return false;
+         }
+        return true;
+    }
+</script>
+<% if orders.present? %>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" style="background:#fef7ea;"> <!-- id="tblOrders" class="display dataTable" -->
+    <tr style="background:#900; color:#fff; text-align:left;">
+        <th>User</th>
+        <th>Number</th>
+        <th>Amount (INR)</th>
+        <th>Status</th>    
+        <th align="center">Action</th>         
+    </tr>
+    <% orders.each do |o| %>         
+    <tr class="gradeA" id="tr_order_<%= o.id %>" style="border-bottom:1px solid #900;" >
+        <td><%= o.user.get_name if o.user %></td>           
+        <td><%= link_to o.order_number, order_path(o) %></td>
+        <td><div id='price_div_<%= o.id %>'><%= o.grand_total %></div></td>           
+        <td><%= o.status %></td>            
+        <td>
+            <%= form_tag orders_settle_payment_path, :id => "index_form"  do %>
+                <%= text_field_tag :remark,'', :class => 'index_amt_field', :id => 'remark_field', :style=>'width: 150px;', :placeholder => "Remarks" %>
+                <%= text_field_tag :amount,'', :class => 'index_amt_field only_float', :id => 'amount_field', :style=>'width: 50px;', :placeholder => "Amount" %>   
+                <%= hidden_field_tag :id, o.id %>
+                <%= submit_tag "Settle", :class => '', :onclick => "return validateFieldsToSettle(this, #{o.id})", :style => 'margin-top: -10px;' %>
+                <%= submit_tag "Close", :class => '', :onclick => "return validateFieldsToClose(this, #{o.id})", :style => 'margin-top: -10px;' %>
+                <%= submit_tag "Cancel", :class => '', :onclick => "return validateFieldsToCancel(this, #{o.id})", :style => 'margin-top: -10px;' %>                    
+            <% end %>           
+        </td>
+    </tr>
+    <% end %>
+</table>
+<% else %>
+<div>
+    No Order available
+</div>
+<% end %>

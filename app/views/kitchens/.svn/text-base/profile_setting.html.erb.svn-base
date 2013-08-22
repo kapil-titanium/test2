@@ -1,0 +1,84 @@
+<script>
+    $(document).ready(function(){
+        var profile_sizes = <%= @available_limit_ids.present? ? @available_limit_ids : "null" %>;
+        $('#party_sizes').val(profile_sizes);
+        
+        $('#profile_submit').click(function(){
+            var selectedSize = 0 ;
+            if( jQuery.isEmptyObject($('#party_sizes').val()) ){
+            }else{
+               selectedSize = $('#party_sizes' ).val().length;
+            }
+            if(selectedSize < 1){
+              alert('Please select Party size');
+              return false;
+            }
+        });
+    });
+</script>
+<%= render :partial => 'kitchen_header', :locals => {:kitchen => @kitchen} %>
+<div id="RC_Reg_Wraper">
+    <div id="RC_Reg_Box">
+        <%= form_for(@kitchen, :validate => true , :url => kitchen_save_profile_setting_path(@kitchen.id) ) do |f| %>
+        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+            <tr>
+                <td><label class="subhead">Available Party Size
+                    <sapn style="color: red;" >
+                        *
+                    </sapn> </label>
+                    <label>(Max Party Order per day)</label>
+                </td>
+                <td> 
+                    <%= select_tag 'party_sizes', options_for_select(@sizes.collect{ |s| ["#{s.min_limit} - #{s.max_limit}", s.id] }) , :multiple => true, :title => 'Use ctrl key for multiple selection', :style => "width:250px" %>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+        	<tr>
+        		<td colspan="2">
+        			<label class="subhead">Cut Off Hours
+        		</td>
+        	</tr>	
+        	<tr>
+                <td width="201px"><label class="subhead"> <%= MENU_NAME_DINNER.capitalize %>
+                    <sapn style="color: red;" >
+                        *
+                    </sapn> </label>
+                    <label></label>
+                </td><% menu_id = Menu.find_by_menu_name(MENU_NAME_DINNER).id %>
+                <td><%= select_tag "dinner_coh", options_from_collection_for_select(@dinner_cut_off_hours, 'id', 'time', @kitchen.kitchen_cut_off_hours.where(:menu_id => menu_id ).first.cut_off_hour.id), :style => "width:60px" %> Hours
+                </td>
+            </tr>
+            <tr>
+                <td  width="201px"><label class="subhead"> <%= MENU_NAME_PARTY.capitalize %>
+                    <sapn style="color: red;" >
+                        *
+                    </sapn> </label>
+                    <label></label>
+                </td><% menu_id = Menu.find_by_menu_name(MENU_NAME_PARTY).id %>
+                <td>
+                	<%= select_tag "party_coh", options_from_collection_for_select(@party_and_treat_cut_off_hours, 'id', 'time', @kitchen.kitchen_cut_off_hours.where(:menu_id => menu_id ).first.cut_off_hour.id), :style => "width:60px" %> Hours
+                </td>
+            </tr>
+            <tr>
+                <td  width="201px"><label class="subhead"> <%= MENU_NAME_TREAT.capitalize %>
+                    <sapn style="color: red;" >
+                        *
+                    </sapn> </label>
+                    <label></label>
+                </td><% menu_id = Menu.find_by_menu_name(MENU_NAME_TREAT).id %>
+                <td>
+                	<%= select_tag "treat_coh", options_from_collection_for_select(@party_and_treat_cut_off_hours, 'id', 'time', @kitchen.kitchen_cut_off_hours.where(:menu_id => menu_id ).first.cut_off_hour.id), :style => "width:60px" %> Hours
+                </td>
+            </tr>	
+             <tr> 
+                <td colspan="2"> <%= f.submit('Update', :class => "Regbtn", :id => "profile_submit") %> </td>
+            </tr>
+           </table>
+        <% end %>
+         <div class="clear"></div> 
+        <hr />
+    </div>
+    <div class="clear"></div> 
+</div>
